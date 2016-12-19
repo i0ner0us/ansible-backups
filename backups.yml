@@ -3,28 +3,18 @@
    gather_facts: no
    connection: local
 
-   vars_prompt:
-   - name: "mgmt_username"
-     prompt: "Username"
-     private: no
-   - name: "mgmt_password"
-     prompt: "Password"
-   - name: "address"
-     prompt: "Address"
-     private: no
-
    tasks:
 
    - name: SYS | Define provider
      set_fact:
        provider:
          host: "{{ inventory_hostname }}"
-         username: "{{ mgmt_username }}"
-         password: "{{ mgmt_password }}"
+         username: "weeksd"
+         password: "T0k3n"
 
    - name: IOS | config changes
      ios_command:
        provider: "{{ provider }}"
        commands:
-         - show run | redirect ftp://{{ address }}/{{ inventory_hostname }}-config
+         - show run | redirect ftp://10.10.20.45/{{ inventory_hostname }}-config
 
